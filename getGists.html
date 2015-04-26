@@ -4,22 +4,31 @@
 		<meta charset="UTF-8">
 		<title>Get Gists</title>
 		<link rel="stylesheet" href="style.css">
-		<script src="gist.js"></script>
+		<script src="gists.js"></script>
 	</head>
 	<body>
-		This is the text body! <br>
-		<section id="topSideBox">
-			<input type="radio" name="languageSelection" value="JavaScript"> JavaScript <br>
-			<input type="radio" name="languageSelection" value="Python"> Python <br>
-			<input type="radio" name="languageSelection" value="JSON"> JSON <br>
-			<input type="radio" name="languageSelection" value="SQL"> SQL <br>
-			<input type="button" name="selectLanguage" value="Retrieve"> <br>
-		</section>
+		<form action="http://web.engr.oregonstate.edu/~osterbit/2/repo/class-content/form_tests/Formtest.php" method="get">
+			<div id="lang">
+				<label>	Select language: </label> <br>
+				<input type="radio" id="r1" name="languageSelection" value="JavaScript"> JavaScript <br>
+				<input type="radio" id="r2" name="languageSelection" value="Python"> Python <br>
+				<input type="radio" id="r3" name="languageSelection" value="JSON"> JSON <br>
+				<input type="radio" id="r4" name="languageSelection" value="SQL"> SQL <br>
+			</div>
+			<div>
+				<label> Enter text to search: </label> <br>
+				<input type="text" name="userText">	
+			</div>
+			<input type="submit"> <br>
+			<input type="button" name="button1" value="Retrieve" onclick="getGist()"> <br>
+		</form>
+
 		<section id="leftSideBox">
 			Select stuff here! <br>
 		</section>
 		<section id="rightSideBox">
 			Display something here! <br>
+			<script src="https://gist.github.com/HPMongo/5900d00abbd8574b7a23.js"></script>
 		</section>
 	</body>
 </html>
