@@ -1,0 +1,11 @@
+Start: Wed, 22 Apr 2015 20:30:10 -0500
+End: Wed, 22 Apr 2015 22:01:18 -0500 
+Tasks: During this period, I created the new repo in GitHub and cloned it to the local machine. I also copied the files from the project directory and started editing it. I was able to fix the variable.js file and committed all of the changes back to GitHub.
+
+Start: Thu, 23 Apr 2015 21:01:05 -0500
+End: Fri, 24 Apr 2015 00:05:12 -0500 
+Tasks: Update function.js. First two function worked correctly. For parseGit, 5 test cases passed and 2 failed. Will work on the remaing test case tomorrow.
+
+Start: Sat, 25 Apr 2015 08:15:00 -0500
+End: Sat, 25 Apr 2015 10:59:14 -0500 
+Tasks: Update objects.js and pass all tests. 
