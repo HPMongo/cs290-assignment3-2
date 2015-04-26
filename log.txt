@@ -8,4 +8,8 @@ Tasks: Update function.js. First two function worked correctly. For parseGit, 5 
 
 Start: Sat, 25 Apr 2015 08:15:00 -0500
 End: Sat, 25 Apr 2015 10:59:14 -0500 
-Tasks: Update objects.js and pass all tests. 
+Tasks: Update objects.js and pass all tests.
+
+Start: Sat, 25 Apr 2015 17:00:00 -0500
+End: Sun, 26 Apr 2015 02:16:31 -0500 
+Tasks: Create new repo for assignment 3-2. I was able to create the basic frame work and successfully call GitHub to getthe list of Gists, parse and store the return information. 
