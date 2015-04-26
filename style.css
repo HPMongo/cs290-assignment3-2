@@ -1,14 +1,32 @@
-#leftSideBox{
+#topBox{
 	float:left;
-	width:250px;
+	width:75%;
 	padding:20px;
 	border:3px solid black;
 }
 
-#rightSideBox{
+#bottomBox{
 	float:left;
-	width:250px;
-	margin-left:10px;
+	width:75%;
+	margin-top:10px;
 	padding:20px;
 	border:3px solid black;
+}
+
+#favoriteTable{
+	float:left;
+	width:75%;
+	padding:20px;
+	margin-top:10px;
+	border:3px solid black;
+	border-spacing:2px;
+}
+
+#resultTable{
+	float:left;
+	width:75%;
+	padding:20px;
+	margin-top:10px;
+	border:3px solid black;
+	border-spacing:2px;
 }

@@ -19,7 +19,7 @@ function gistDetail(inId, inDes, inURL) {
 	this.getURL = getURL;
 }	
 
-function callGitHub(inLang, inUser) {
+function callGitHub(inLang) {
 	var req = new XMLHttpRequest();
 	if(!req) {
 		throw "Unable to create HttpRequest.";
@@ -38,7 +38,8 @@ function callGitHub(inLang, inUser) {
 				var newGist = new gistDetail(tmpID, tmpDesc, tmpURL);
 				gistArray.push(newGist);
 			}
-			document.write(gistArray[0].getID());
+			displayResult(gistArray);
+			return gistArray;
 		}	
 	}
 	req.open('GET', url);
@@ -46,7 +47,6 @@ function callGitHub(inLang, inUser) {
 }
 
 function getGist() {
-	var userName = document.getElementsByName('userText')[0].value;
 	var languageSelected;
 	if(document.getElementById('r1').checked) {
 		languageSelected = document.getElementById('r1').value;
@@ -59,6 +59,16 @@ function getGist() {
 	} else {
 		languageSelected = null;	
 	}
-	callGitHub(languageSelected, userName);
+	var gistList = callGitHub(languageSelected);
 }	
+
+function displayResult(inArray) {
+	var resultBox = document.getElementById("resultTable");
+	var tmpText;
+	for(var i=0; i<inArray.length; i++) {
+		tmpText = "Description: " + inArray[i].getDesc() + "\n" + "URL:" + inArray[i].getURL() + "\n \n";
+		var tmpNode = document.createTextNode(tmpText);
+		resultBox.appendChild(tmpNode);
+	}
+}
 
