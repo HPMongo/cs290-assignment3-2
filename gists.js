@@ -20,7 +20,9 @@ function gistDetail(inId, inDes, inURL) {
 	this.getDesc = getDesc;
 	this.getURL = getURL;
 }	
-
+/*
+	This function will call the GitHub API to get the public gists
+*/
 function callGitHub(inLang) {
 	var req = new XMLHttpRequest();
 	if(!req) {
@@ -33,7 +35,7 @@ function callGitHub(inLang) {
 		if(req.readyState===4) {
 			var returnGist = JSON.parse(this.responseText)
 			var tmpURL, tmpID, tmpDesc;
-			for(var i=0; i<5; i++) {
+			for(var i=0; i<30; i++) {	//load 30 items at a time
 				tmpID = returnGist[i].id;
 				tmpDesc = returnGist[i].description;
 				tmpURL = returnGist[i].url;
@@ -48,6 +50,9 @@ function callGitHub(inLang) {
 	req.send();
 }
 
+/*
+	This function will check the user's input to see if there is a language selected
+*/
 function getGist() {
 	var languageSelected;
 	if(document.getElementById('r1').checked) {
@@ -63,7 +68,6 @@ function getGist() {
 	}
 	var gistList = callGitHub(languageSelected);
 }	
-
 
 /* 
 	Display result back in a table using an array input.
@@ -103,6 +107,50 @@ function addToFav(obj) {
 	localStorage.setItem('userFavorites', JSON.stringify(settings));
 //Delete the row from the result table
 	resultBox.deleteRow(index);
+//Add the row to the favorite table
+	var	favoriteBox = document.getElementById("favoriteTable");
+	var rowCount = favoriteBox.rows.length;
+	var insertRow = favoriteBox.insertRow(rowCount);
+	insertRow.insertCell(0).innerHTML='<input type="button" value = "Remove from Favorite" onClick="Javacsript:removeFromFav(this)">';
+	insertRow.insertCell(1).innerHTML= sID;
+	insertRow.insertCell(2).innerHTML= sDesc;
+	insertRow.insertCell(3).innerHTML= sURL;
+}
+
+/*
+	This function will remove an item from the favorite table, remove it from local storage,
+	reload local storage and populate the item back to the result table.
+*/
+function removeFromFav(obj) {
+	var index = obj.parentNode.parentNode.rowIndex;
+	var	favoriteBox = document.getElementById("favoriteTable");
+//Get information from the table
+	var sID = favoriteBox.rows[index].cells[1].innerHTML;
+	var sDesc = favoriteBox.rows[index].cells[2].innerHTML;
+	var sURL = favoriteBox.rows[index].cells[3].innerHTML;
+//Insert the row back to the result table
+	var	resultBox = document.getElementById("resultTable");
+	var rowCount = resultBox.rows.length;
+	var insertRow = resultBox.insertRow(rowCount);
+	insertRow.insertCell(0).innerHTML='<input type="button" value = "Add to Favorite" onClick="Javacsript:addToFav(this)">';
+	insertRow.insertCell(1).innerHTML= sID;
+	insertRow.insertCell(2).innerHTML= sDesc;
+	insertRow.insertCell(3).innerHTML= sURL;
+//Remove the item from the setting array
+	var elementIdx = 0, notFound = 1, currentIdx = 0;
+	while(notFound === 1 && currentIdx <settings.favorites.length) {
+		if(settings.favorites[currentIdx].gistId === sID) {
+			notFound = 0;
+			settings.favorites.splice(currentIdx, 1);
+		}
+		else {
+			currentIdx++;
+		}
+	}
+//Reload the local storage with the updated array
+	localStorage.setItem('userFavorites', JSON.stringify(settings));
+//Delete the row from the favorite table
+	favoriteBox.deleteRow(index);
 }
 
 /*
@@ -110,16 +158,15 @@ function addToFav(obj) {
 */
 function loadFavorites() {
 	var favoriteBox = document.getElementById("favoriteTable");
-	var tmpID, rowCount, row;
-	for(var i=0; i<inArray.length; i++) {
-		tmpID = inArray[i].getID();
-		rowCount = resultBox.rows.length;
-		row = resultBox.insertRow(rowCount);
-		row.insertCell(0).innerHTML='<input type="button" value = "Remove from Favorite" onClick="Javacsript:removefromFav(this)">';
-		row.insertCell(1).innerHTML= inArray[i].getID();
-		row.insertCell(2).innerHTML= inArray[i].getDesc();
-		row.insertCell(3).innerHTML= inArray[i].getURL();
-	}
+	var rowCount, row;
+	settings.favorites.forEach(function(s) {
+		rowCount = favoriteBox.rows.length;
+		row = favoriteBox.insertRow(rowCount);
+		row.insertCell(0).innerHTML='<input type="button" value = "Remove from Favorite" onClick="Javacsript:removeFromFav(this)">';
+		row.insertCell(1).innerHTML= s.gistId;
+		row.insertCell(2).innerHTML= s.gistDesc;
+		row.insertCell(3).innerHTML= s.gistURL;
+	});
 }
 /*
 	This function will load variables from the local storage.
@@ -133,6 +180,6 @@ window.onload = function() {
 	}
 	else {
 		settings = JSON.parse(localStorage.getItem('userFavorites'));
-		//loadFavorites();
+		loadFavorites();
 	}
 }
