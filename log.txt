@@ -12,4 +12,8 @@ Tasks: Update objects.js and pass all tests.
 
 Start: Sat, 25 Apr 2015 17:00:00 -0500
 End: Sun, 26 Apr 2015 02:16:31 -0500 
-Tasks: Create new repo for assignment 3-2. I was able to create the basic frame work and successfully call GitHub to getthe list of Gists, parse and store the return information. 
+Tasks: Create new repo for assignment 3-2. I was able to create the basic frame work and successfully call GitHub to getthe list of Gists, parse and store the return information.
+
+Start: Sun, 26 Apr 2015 12:10:00 -0500
+End: Sun, 26 Apr 2015 23:16:51 -0500 
+Tasks: Got everything to works - AJAX response from GitHub, display result on web page, store favorites to local storage, retrieve from local storage to populate favorite table, remove from favorite table. However, the extra credit stuff - language filter and the paging functionalities are not yet working.  
