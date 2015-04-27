@@ -20,6 +20,7 @@ function gistDetail(inId, inDes, inURL) {
 	this.getDesc = getDesc;
 	this.getURL = getURL;
 }	
+
 /*
 	This function will call the GitHub API to get the public gists
 */
